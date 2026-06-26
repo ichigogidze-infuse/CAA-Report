@@ -91,7 +91,7 @@ html{scroll-behavior:smooth}
 .cost-tip td{padding:2px 0;border:0}
 .cost-tip td.r{text-align:right;color:#fff;font-weight:600;padding-left:14px;white-space:nowrap}
 .cost-tip .role{color:#94a3b8}
-.relval{display:inline-block;margin-top:8px;background:#ecfdf5;color:var(--green);border:1px solid #a7f3d0;border-radius:6px;padding:3px 9px;font-size:12px;font-weight:700}
+.relval{display:inline-block;margin-top:8px;margin-right:6px;background:#ecfdf5;color:var(--green);border:1px solid #a7f3d0;border-radius:6px;padding:3px 9px;font-size:12px;font-weight:700}
 .rmtl{display:flex;align-items:flex-start;overflow-x:auto;padding:8px 2px 18px;margin-bottom:6px}
 .rmnode{flex:1 1 0;min-width:128px;text-align:center}
 .rmdot{width:36px;height:36px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#fff;background:#94a3b8}
@@ -225,11 +225,11 @@ const RELEASES=[
     "Split Geo and Industry parameters out of the ICP",
     "AI assistant that translates client requirements into campaign parameters",
     "Separate parameters for Geo and Industry"]},
-  {n:2,name:"Geo & Industry Alignment Tabs",start:"2026-07-06",end:"2026-07-10",value:"Spot weak regions & industries at a glance",scope:[
-    "Separate view of Geo against ICPs and assets",
-    "Separate view of Industry against ICPs and assets"]},
-  {n:3,name:"Alignment Views in Reports",start:"2026-07-10",end:"2026-07-29",value:"AI-guided asset fixes, less manual review",scope:[
-    "Add the new alignment views to the report PDF",
+  {n:2,name:"Geo & Industry Alignment Tabs",start:"2026-07-06",end:"2026-07-10",value:"Check alignment-score metrics for Geo & Industry",scope:[
+    "Separate alignment view of Geo against assets",
+    "Separate alignment view of Industry against assets"]},
+  {n:3,name:"Alignment Views in Reports",start:"2026-07-10",end:"2026-07-29",value:["AI-guided asset fixes, less manual review","Exportable, shareable PDF reports"],scope:[
+    "Add the new Geo and Industry alignment views to the report PDF",
     "AI suggestions for asset improvements based on Geo and Industry alignments"]},
   {n:4,name:"Combined View & Campaign Analysis Dashboard",start:"2026-07-29",end:"2026-08-10",value:"Full campaign health in one view",scope:[
     "Combined view of all alignment dimensions against assets",
@@ -369,7 +369,7 @@ function renderReleases(){
       +'<div class="num">R'+r.n+'</div>'
       +'<div><h3>'+r.name+'</h3>'
       +'<div class="dates">'+fmtDate(r.start)+' &rarr; '+fmtDate(r.end)+'</div>'
-      +'<ul>'+r.scope.map(x=>'<li>'+x+'</li>').join('')+'</ul>'+(r.value?'<div class="relval">'+r.value+'</div>':'')+bar+shotsHtml(r.n)+'</div>'
+      +'<ul>'+r.scope.map(x=>'<li>'+x+'</li>').join('')+'</ul>'+(r.value?(Array.isArray(r.value)?r.value:[r.value]).map(function(v){return '<div class="relval">'+v+'</div>';}).join(''):'')+bar+shotsHtml(r.n)+'</div>'
       +'<div class="st '+st.cls+'">'+st.txt+'</div>'
     +'</div>';
   }).join("");
