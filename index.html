@@ -91,7 +91,8 @@ html{scroll-behavior:smooth}
 .cost-tip td{padding:2px 0;border:0}
 .cost-tip td.r{text-align:right;color:#fff;font-weight:600;padding-left:14px;white-space:nowrap}
 .cost-tip .role{color:#94a3b8}
-.relcost{display:inline-block;margin-top:8px;background:#f1f5f9;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 9px;font-size:12px;font-weight:600}
+.relcost{display:inline-block;margin-top:8px;margin-right:6px;background:#f1f5f9;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 9px;font-size:12px;font-weight:600}
+.relcost.costall{background:#eef2ff;color:var(--blue);border-color:#c7d2fe}
 .relval{display:inline-block;margin-top:8px;margin-right:6px;background:#ecfdf5;color:var(--green);border:1px solid #a7f3d0;border-radius:6px;padding:3px 9px;font-size:12px;font-weight:700}
 .rmtl{display:flex;align-items:flex-start;overflow-x:auto;padding:8px 2px 18px;margin-bottom:6px}
 .rmnode{flex:1 1 0;min-width:128px;text-align:center}
@@ -222,20 +223,20 @@ function topFeatureOf(id){
 
 // ---- releases ----
 const RELEASES=[
-  {n:1,name:"Upgraded AI Campaign Creation Flow",start:"2026-06-10",end:"2026-07-06",cost:3920,value:"~20x faster campaign creation",scope:[
+  {n:1,name:"Upgraded AI Campaign Creation Flow",start:"2026-06-10",end:"2026-07-10",value:"~20x faster campaign creation",cost:4595,costGrand:4951,scope:[
     "Split Geo and Industry parameters out of the ICP",
     "AI assistant that translates client requirements into campaign parameters",
     "Separate parameters for Geo and Industry"]},
-  {n:2,name:"Geo & Industry Alignment Tabs",start:"2026-07-06",end:"2026-07-10",cost:603,value:"Check alignment-score metrics for Geo & Industry",scope:[
+  {n:2,name:"Geo & Industry Alignment Tabs",start:"2026-07-10",end:"2026-07-31",value:"Check alignment-score metrics for Geo & Industry",cost:2639,costGrand:2843,scope:[
     "Separate alignment view of Geo against assets",
     "Separate alignment view of Industry against assets"]},
-  {n:3,name:"Alignment Views in Reports",start:"2026-07-10",end:"2026-07-29",cost:2864,value:["AI-guided asset fixes, less manual review","Exportable, shareable PDF reports"],scope:[
+  {n:3,name:"Alignment Views in Reports",start:"2026-07-31",end:"2026-08-07",value:["AI-guided asset fixes, less manual review","Exportable, shareable PDF reports"],cost:2093,costGrand:2255,scope:[
     "Add the new Geo and Industry alignment views to the report PDF",
     "AI suggestions for asset improvements based on Geo and Industry alignments"]},
-  {n:4,name:"Combined View & Campaign Analysis Dashboard",start:"2026-07-29",end:"2026-08-10",cost:1809,value:"Full campaign health in one view",scope:[
+  {n:4,name:"Combined View & Campaign Analysis Dashboard",start:"2026-08-07",end:"2026-08-28",value:"Full campaign health in one view",cost:3640,costGrand:3922,scope:[
     "Combined view of all alignment dimensions against assets",
     "Campaign Analysis report - overview of campaign issues and improvement suggestions"]},
-  {n:5,name:"Geo & Industry Pages",start:"2026-08-10",end:"2026-08-26",cost:2412,value:"Deep-dive into each dimension on its own page",scope:[
+  {n:5,name:"Geo & Industry Pages",start:"2026-08-28",end:"2026-09-11",value:"Deep-dive into each dimension on its own page",cost:2458,costGrand:2647,scope:[
     "Separate Geo page with an overview",
     "Separate Industry page with an overview",
     "New Geo and Industry modal windows",
@@ -370,7 +371,7 @@ function renderReleases(){
       +'<div class="num">R'+r.n+'</div>'
       +'<div><h3>'+r.name+'</h3>'
       +'<div class="dates">'+fmtDate(r.start)+' &rarr; '+fmtDate(r.end)+'</div>'
-      +'<ul>'+r.scope.map(x=>'<li>'+x+'</li>').join('')+'</ul>'+(r.value?(Array.isArray(r.value)?r.value:[r.value]).map(function(v){return '<div class="relval">'+v+'</div>';}).join(''):'')+(r.cost?'<div class="relcost" title="Estimated from the 3-month average development burn, pro-rated by release duration">Est. cost ~$'+Number(r.cost).toLocaleString('en-US')+'</div>':'')+bar+shotsHtml(r.n)+'</div>'
+      +'<ul>'+r.scope.map(x=>'<li>'+x+'</li>').join('')+'</ul>'+(r.value?(Array.isArray(r.value)?r.value:[r.value]).map(function(v){return '<div class="relval">'+v+'</div>';}).join(''):'')+(r.cost?'<div class="relcost" title="Development cost - engineering, QA, PM and Head of R&D. Jira task hours priced at the 3-month development burn (Apr-Jun 2026). Includes a 15% buffer.">Dev ~$'+Number(r.cost).toLocaleString('en-US')+'</div>':'')+(r.costGrand?'<div class="relcost costall" title="Total cost - development plus Infrastructure & LLM. Includes a 15% buffer.">Total ~$'+Number(r.costGrand).toLocaleString('en-US')+'</div>':'')+bar+shotsHtml(r.n)+'</div>'
       +'<div class="st '+st.cls+'">'+st.txt+'</div>'
     +'</div>';
   }).join("");
